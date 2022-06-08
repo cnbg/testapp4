@@ -1,0 +1,75 @@
+{
+    "name": "cnbg/testapp4",
+    "type": "project",
+    "description": "Test app 4",
+    "authors": [
+        {
+            "name": "Cngz B",
+            "email": "nurchin@gmail.com"
+        }
+    ],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*",
+        "ext-redis": "*",
+        "laravel-notification-channels/twilio": "^3.2",
+        "laravel/framework": "^9.11",
+        "laravel/sanctum": "^2.14.1",
+        "laravel/tinker": "^2.7",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^12.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.1",
+        "phpunit/phpunit": "^9.5.10",
+        "spatie/laravel-ignition": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "suggest": {
+        "ext-pcntl": "Required to use all features of the queue consumer."
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

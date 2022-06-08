@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreNotificationRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return auth()->check();
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
+    public function rules()
+    {
+        $rules = [
+            'client_id' => ['required', 'exists:clients,id'],
+            'channel' => ['required', 'in:sms,email'],
+            'content' => ['required',],
+        ];
+
+        if ($this->channel === 'sms') {
+            $rules['content'][] = 'max:5';
+        }
+
+        return $rules;
+    }
+}
